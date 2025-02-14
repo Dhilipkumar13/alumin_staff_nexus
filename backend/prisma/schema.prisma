@@ -1,0 +1,142 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model company_offers {
+  cname       String @db.VarChar(255)
+  role        String @db.VarChar(255)
+  eligibility String @db.VarChar(255)
+  uid         Int    @id @default(autoincrement())
+  open_date   String @db.VarChar(255)
+  close_date  String @db.VarChar(255)
+}
+
+model po_table {
+  id      Int    @id @default(autoincrement())
+  name    String @db.VarChar(255)
+  dob     String @db.VarChar(255)
+  doj     String @db.VarChar(255)
+  email   String @db.VarChar(255)
+  phone   String @db.VarChar(255)
+  address String @db.VarChar(255)
+  college String @db.VarChar(255)
+}
+
+model staff_details {
+  uid          Int    @default(autoincrement())
+  staff_name   String @db.VarChar(255)
+  staff_id     String @db.VarChar(255)
+  staff_phone  String @db.VarChar(255)
+  staff_email  String @db.VarChar(255)
+  Domain       String @db.VarChar(255)
+  DOJ          String @db.VarChar(255)
+  college_name String @db.VarChar(255)
+  department   String @db.VarChar(255)
+  image        String @db.VarChar(255)
+
+  @@id([uid, staff_id])
+}
+
+model student_details {
+  uid                Int    @default(autoincrement())
+  name               String @db.VarChar(255)
+  regno              String @db.VarChar(255)
+  department         String @db.VarChar(255)
+  pass_year          String @db.VarChar(255)
+  domain             String @db.VarChar(255)
+  college_name       String @db.VarChar(255)
+  image              String @db.VarChar(255)
+  phone              String @db.VarChar(255)
+  email              String @db.VarChar(255)
+  city               String @db.VarChar(255)
+  aoi                String @db.VarChar(255)
+  alumni_interaction String @db.VarChar(255)
+
+  @@id([uid, regno])
+}
+
+model alumni_details {
+  uid        Int     @id @default(autoincrement())
+  name       String  @db.VarChar(200)
+  regno      String  @db.VarChar(200)
+  department String  @db.VarChar(200)
+  phone      String  @db.VarChar(200)
+  email      String  @db.VarChar(200)
+  domain     String  @db.VarChar(200)
+  company    String? @db.VarChar(200)
+  city       String  @db.VarChar(200)
+  pass_year  String  @db.VarChar(200)
+  image      String? @db.VarChar(255)
+}
+
+model student_interaction {
+  id              Int    @id @default(autoincrement())
+  student_name    String @db.VarChar(255)
+  alumni_name     String @db.VarChar(255)
+  meeting_request String @db.VarChar(255)
+  meeting_time    String @db.VarChar(255)
+  meeting_date    String @db.VarChar(255)
+  status          String @db.VarChar(255)
+  meeting_link    String @db.VarChar(255)
+}
+
+model student_staff_interaction {
+  uid             Int    @id @default(autoincrement())
+  student_name    String @db.VarChar(200)
+  staff_name      String @db.VarChar(200)
+  meeting_request String @db.VarChar(200)
+  meeting_date    String @db.VarChar(200)
+  meeting_time    String @db.VarChar(200)
+  status          String @default("pending") @db.VarChar(100)
+  meeting_link    String @db.VarChar(255)
+}
+
+model alumni_interaction_program {
+  uid         Int    @id @default(autoincrement())
+  alumni_name String @db.VarChar(200)
+  department  String @db.VarChar(200)
+  date        String @db.VarChar(200)
+  time        String @db.VarChar(200)
+  venue       String @db.VarChar(200)
+  title       String @db.VarChar(200)
+  email       String @db.VarChar(200)
+}
+
+model student_alumni_interaction {
+  uid        Int    @id @default(autoincrement())
+  name       String @db.VarChar(200)
+  regno      String @db.VarChar(200)
+  domain     String @db.VarChar(100)
+  department String @db.VarChar(200)
+  pass_year  String @db.VarChar(100)
+  regarding  String @db.VarChar(200)
+  date       String @db.VarChar(200)
+  time       String @db.VarChar(200)
+  link       String @db.VarChar(300)
+  status     String @default("pending") @db.VarChar(100)
+
+  @@ignore
+}
+
+model staff_login {
+  id   Int    @id @default(autoincrement())
+  name String @db.VarChar(255)
+  pass String @db.VarChar(255)
+}
+
+model alumni_login {
+  id   Int    @id @default(autoincrement())
+  name String @db.VarChar(255)
+  pass String @db.VarChar(255)
+}
+
+model student_login {
+  id   Int    @id @default(autoincrement())
+  name String @db.VarChar(255)
+  pass String @db.VarChar(255)
+}
